@@ -9,20 +9,32 @@ const kameny = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
 // 5. Zahraj příslušný tón zavoláním funkce `zahraj('C')` a `'C'` nahraď názvem odpovídajícího tónu. Import přehrávací funkce už máš předchystaný výše.
 // 6. Zapni si v počítači zvuk a xylofon otestuj.
 
+import react, {useState} from 'react'
+
 export const Xylofon = () => {
+	// const nadpis =  () => {
+	// 	const h1Element = document.querySelector('h1')
+	// 	h1Element.textContent = 'Cink!'
+	// }
+
+	const [nadpis, setNadpis] = useState('Xylofon')
+
 	return (
 		<>
-			<h1>Xylofon</h1>
-			<div className="xylofon">
-				<button type="button" className="kamen">
-					C
-				</button>
-				<button type="button" className="kamen">
-					D
-				</button>
-				<button type="button" className="kamen">
-					E
-				</button>
+			<h1>{nadpis}</h1>
+			<div className='xylofon'>
+				{kameny.map((kamen, index) => (
+					<button 
+						key={kamen} 
+						className='kamen' 
+						onClick={(e) => { 
+							const ton = e.target.textContent
+							setNadpis(ton) 
+							zahraj(ton)}}
+					>
+						{kamen}
+					</button>
+				))}
 			</div>
 		</>
 	)
